@@ -19,12 +19,15 @@ class PhoneBook:
         """
 
     def add(self, name: str, phone_number: str) -> None:
+        if name in self.phonebook: #is name already in the dictionary?
+            self.phonebook[name].append(phone_number) #if it does we need to add the new phone number
+        else: #if it doesnt we have to create a new list
+            self.phonebook[name] = [phone_number]
         """
         Add a phone number for a contact
         :param name: Contact name
         :param phone_number: Phone number to add
         """
-        pass
 
     def add_all(self, name: str, *phone_numbers: str) -> None:
         """
