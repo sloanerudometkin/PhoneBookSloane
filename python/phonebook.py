@@ -62,7 +62,7 @@ class PhoneBook:
         :param name: Contact name to look up
         :return: List of phone numbers for the contact
         """
-        return None
+        return self.phonebook.get(name, []) #called in the add all test to see the numbers linked to that name. [name] to access the dictionary or return empty list
 
     def reverse_lookup(self, phone_number: str) -> str:
         """
