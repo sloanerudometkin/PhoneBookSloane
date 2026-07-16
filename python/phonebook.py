@@ -40,12 +40,12 @@ class PhoneBook:
         else:
             self.phonebook[name].extend(phone_numbers) #extend takes the new list and all its tuples (elements) to the exiisting list
 
-    def remove(self, name: str) -> None:
+    def remove(self, name: str) -> None: #first have to see if the name is in the dictionary so we can remove it
         """
         Remove a contact from the phonebook
         :param name: Contact name to remove
         """
-        pass
+        self.phonebook.pop(name, None) #look for the name, find it, delete it (only if it finds the name)
 
     def has_entry(self, name: str, phone_number: str = None) -> bool:
         """
