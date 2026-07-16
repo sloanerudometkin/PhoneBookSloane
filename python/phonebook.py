@@ -29,13 +29,16 @@ class PhoneBook:
         :param phone_number: Phone number to add
         """
 
-    def add_all(self, name: str, *phone_numbers: str) -> None:
+    def add_all(self, name: str, *phone_numbers: str) -> None: #looked up arbitrary argument unpacking: bundle into a tuple
         """
         Add multiple phone numbers for a contact
         :param name: Contact name
         :param phone_numbers: Variable number of phone numbers to add
         """
-        pass
+        if name not in self.phonebook:
+            self.phonebook[name] = list(phone_numbers) #phone numbers comes in as a tuple but we need to change it to a list to match our formatting for the phonebook
+        else:
+            self.phonebook[name].extend(phone_numbers) #extend takes the new list and all its tuples (elements) to the exiisting list
 
     def remove(self, name: str) -> None:
         """
