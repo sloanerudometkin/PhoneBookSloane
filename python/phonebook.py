@@ -54,7 +54,11 @@ class PhoneBook:
         :param phone_number: Optional phone number to check
         :return: True if contact exists (with phone number if specified), False otherwise
         """
-        return None
+        if name not in self.phonebook: #has to return true or false for the test_remove. 
+            return False
+        if phone_number is None: #then just check for the name key in the dictionary and see if it is associated with the phone number
+            return True
+        return phone_number in self.phonebook[name]
 
     def lookup(self, name: str) -> List[str]:
         """
