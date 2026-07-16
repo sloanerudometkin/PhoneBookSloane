@@ -17,7 +17,6 @@ class PhoneBook:
         Constructor for PhoneBook
         :param phonebook_dict: Optional dictionary to initialize the phonebook with
         """
-        self.phonebook = phonebook_dict
 
     def add(self, name: str, phone_number: str) -> None:
         """
@@ -74,7 +73,7 @@ class PhoneBook:
         """
         return None
 
-    def get_map(self) -> Dict[str, List[str]]:
+    def get_map(self) -> Dict[str, List[str]]: #return self phonebook to the test: it expects a dictionary
         """
         Get the underlying dictionary representation of the phonebook
         :return: Dictionary mapping names to lists of phone numbers
