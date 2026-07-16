@@ -9,11 +9,15 @@ class PhoneBook:
     """
 
     def __init__(self, phonebook_dict: Optional[Dict[str, List[str]]] = None):
+        if phonebook_dict is None:
+            self.phonebook = {} #create brand new dictionary if none
+        else:
+            self.phonebook = phonebook_dict #if passing in existing list, pass it to the phonebook_dict field
         """
         Constructor for PhoneBook
         :param phonebook_dict: Optional dictionary to initialize the phonebook with
         """
-        self.phonebook = None
+        self.phonebook = phonebook_dict
 
     def add(self, name: str, phone_number: str) -> None:
         """
@@ -75,4 +79,4 @@ class PhoneBook:
         Get the underlying dictionary representation of the phonebook
         :return: Dictionary mapping names to lists of phone numbers
         """
-        return None
+        return self.phonebook
