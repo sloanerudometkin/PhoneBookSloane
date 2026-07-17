@@ -36,16 +36,18 @@ class PhoneBook:
         :param phone_numbers: Variable number of phone numbers to add
         """
         if name not in self.phonebook:
-            self.phonebook[name] = list(phone_numbers) #phone numbers comes in as a tuple but we need to change it to a list to match our formatting for the phonebook
-        else:
-            self.phonebook[name].extend(phone_numbers) #extend takes the new list and all its tuples (elements) to the exiisting list
+            self.phonebook[name] = []
+        
+        for phone_number in phone_numbers:
+            self.phonebook[name].append(phone_number) #phone numbers comes in as a tuple but we need to change it to a list to match our formatting for the phonebook
 
     def remove(self, name: str) -> None: #first have to see if the name is in the dictionary so we can remove it
         """
         Remove a contact from the phonebook
         :param name: Contact name to remove
         """
-        self.phonebook.pop(name, None) #look for the name, find it, delete it (only if it finds the name)
+        if name in self.phonebook:
+            del self.phonebook[name]
 
     def has_entry(self, name: str, phone_number: str = None) -> bool:
         """
@@ -58,15 +60,20 @@ class PhoneBook:
             return False
         if phone_number is None: #then just check for the name key in the dictionary and see if it is associated with the phone number
             return True
-        return phone_number in self.phonebook[name]
-
+        for number in self.phonebook[name]:
+            if number == phone_number:
+                return True
+            return False
+        
     def lookup(self, name: str) -> List[str]:
         """
         Look up all phone numbers for a contact
         :param name: Contact name to look up
         :return: List of phone numbers for the contact
         """
-        return self.phonebook.get(name, []) #called in the add all test to see the numbers linked to that name. [name] to access the dictionary or return empty list
+        if name in self.phonebook:
+            return self.phonebook[name]
+        return [] #called in the add all test to see the numbers linked to that name. [name] to access the dictionary or return empty list
 
     def reverse_lookup(self, phone_number: str) -> str:
         """
@@ -74,6 +81,11 @@ class PhoneBook:
         :param phone_number: Phone number to look up
         :return: Contact name associated with the phone number
         """
+        for name in self.phonebook:
+            numbers = self.phonebook[name]
+            for number in numbers:
+                if number == phone_number:
+                    return name
         return None
 
     def get_all_contact_names(self) -> List[str]:
@@ -81,7 +93,10 @@ class PhoneBook:
         Get all contact names in the phonebook
         :return: List of all contact names
         """
-        return None
+        names: List[str] = []
+        for name in self.phonebook:
+            names.append(name)
+        return names
 
     def get_map(self) -> Dict[str, List[str]]: #return self phonebook to the test: it expects a dictionary
         """
